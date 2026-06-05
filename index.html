@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BlogVerse - Proses Bisnis</title>
+    <title>HamBlog</title>
     <style>
       * {
         margin: 0;
@@ -32,6 +32,7 @@
         font-size: 26px;
         font-weight: 800;
         color: #6c4df6;
+        cursor: pointer;
       }
       nav a {
         margin-left: 25px;
@@ -85,7 +86,7 @@
         height: 340px;
         object-fit: cover;
       }
-      .hero-card div {
+      .hero-card .hero-card-content {
         padding: 25px;
       }
       .section {
@@ -178,6 +179,82 @@
         font-size: 13px;
         margin-top: 12px;
         color: rgba(255, 255, 255, 0.85);
+      }
+      .name-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(16, 18, 40, 0.58);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        z-index: 50;
+        backdrop-filter: blur(10px);
+      }
+      .name-modal.active {
+        display: flex;
+      }
+      .name-modal-card {
+        width: min(100%, 440px);
+        background: rgba(255, 255, 255, 0.96);
+        border-radius: 28px;
+        padding: 30px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
+      }
+      .name-modal-card h2 {
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+      .name-modal-card p {
+        color: #666;
+        margin-bottom: 18px;
+      }
+      .name-modal-card input {
+        width: 100%;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        outline: none;
+        margin-bottom: 16px;
+      }
+      .name-modal-card input:focus {
+        border-color: #6c4df6;
+        box-shadow: 0 0 0 4px rgba(108, 77, 246, 0.12);
+      }
+      .name-modal-card .btn {
+        width: 100%;
+      }
+      .hero-card .hero-banner {
+        height: 340px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: url("https://i-systemasia.com/wp-content/uploads/2022/08/step-business-process-management.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #f5f6fb;
+        color: white;
+        border-radius: 20px 20px 0 0;
+        overflow: hidden;
+        padding: 0;
+      }
+      .hero-card .hero-banner-content {
+        text-align: center;
+        padding: 20px 24px;
+      }
+      .hero-card .hero-banner-content h3 {
+        font-size: 28px;
+        letter-spacing: 2px;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .hero-card .hero-banner-content p {
+        opacity: 0.95;
+        font-size: 14px;
+        margin: 0;
       }
       #articlePage1,
       #articlePage2,
@@ -286,44 +363,93 @@
   </head>
 
   <body>
+    <div class="name-modal" id="nameModal" aria-hidden="true">
+      <div
+        class="name-modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="nameModalTitle"
+      >
+        <h2 id="nameModalTitle">Siapa kamu?</h2>
+        <p></p>
+        <input
+          id="visitorNameInput"
+          type="text"
+          placeholder="Masukkan nama"
+          autocomplete="name"
+        />
+        <button class="btn" id="visitorNameSubmit">Simpan Nama</button>
+      </div>
+    </div>
+
     <header>
-      <div class="logo">BlogVerse</div>
+      <div
+        class="logo"
+        onclick="backHome()"
+        role="button"
+        tabindex="0"
+        onkeydown="
+          if (event.key === 'Enter') {
+            backHome();
+          }
+        "
+      >
+        HamBlog
+      </div>
       <nav>
         <a onclick="backHome()">Home</a>
-        <a onclick="backHome()">Artikel</a>
-        <a>Kategori</a>
-        <a>Tentang</a>
+        <a
+          onclick="
+            document
+              .getElementById('articleSection')
+              .scrollIntoView({ behavior: 'smooth' })
+          "
+          >Artikel</a
+        >
+        <a
+          onclick="
+            document
+              .getElementById('profileSection')
+              .scrollIntoView({ behavior: 'smooth' })
+          "
+          >Profile</a
+        >
       </nav>
     </header>
 
     <div id="homePage">
       <section class="hero">
         <div>
-          <h1>Blog Proses Bisnis yang <span>Modern & Aesthetic</span></h1>
+          <h1>
+            Selamat Datang <span id="visitorName">Modern & Aesthetic</span>
+          </h1>
           <p>
-            Website blog dengan tampilan elegan, clean, dan menarik seperti
-            Blogspot, tetapi dibuat lebih modern dan nyaman dibaca.
+            Silahkan membaca artikel yang sudah saya buat dengan sebaik mungkin.
+            Artikel ini membahas tentang evaluasi proses bisnis pada perusahaan.
           </p>
-          <button class="btn" onclick="showArticle1()">Mulai Membaca</button>
+          <button
+            class="btn"
+            onclick="
+              document
+                .getElementById('articleSection')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            Mulai Membaca
+          </button>
         </div>
         <div class="hero-card">
-          <img
-            src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=900&q=80"
-          />
-          <div>
-            <span class="tag">Featured</span>
-            <h3>
-              Menganalisa Evaluasi Proses Bisnis pada PT. Panasonic Manufaktur
-            </h3>
-            <p>
-              Analisis SWOT untuk melihat kekuatan, kelemahan, peluang, dan
-              ancaman Panasonic.
-            </p>
+          <div class="hero-banner" aria-hidden="false">
+            <div class="hero-banner-content"></div>
+          </div>
+          <div class="hero-card-content">
+            <span class="tag">Important</span>
+            <h3>Kunci sukses perusahaan di era digital.</h3>
           </div>
         </div>
       </section>
 
-      <section class="section">
+      <section class="section" id="articleSection">
         <h2 class="section-title">Artikel Terbaru</h2>
         <div class="blog-grid">
           <div class="post">
@@ -426,7 +552,7 @@
               </h3>
               <p>
                 Pengoptimalan proses bisnis juga dapat ditemukan dalam aktivitas
-                sederhana seperti kantin kampus.
+                sederhana dalam kehidupan sehari-hari.
               </p>
               <a class="read-more" onclick="showArticle6()"
                 >Baca Selengkapnya →</a
@@ -436,7 +562,7 @@
         </div>
       </section>
 
-      <section class="newsletter">
+      <section class="newsletter" id="profileSection">
         <h2>Tugas Kuliah — MK Manajemen Proses Bisnis</h2>
         <div class="sub">
           Prodi Sistem Informasi — Universitas Indraprasta PGRI (Unindra)
@@ -447,6 +573,7 @@
           </p>
           <p><strong>Nama</strong><br />Ilham Ramadani</p>
           <p><strong>NPM</strong><br />202533500298</p>
+          <p><strong>Kelas</strong><br />R2G</p>
           <p>
             <strong>Link PMBK</strong><br /><a
               href="https://pmb.unindra.ac.id/"
@@ -457,7 +584,6 @@
             (kode ref 2107)
           </p>
         </div>
-        <div class="note">Tugas untuk mata kuliah Manajemen Proses Bisnis.</div>
       </section>
     </div>
 
@@ -468,9 +594,7 @@
           Menganalisa Evaluasi Proses Bisnis pada Perusahaan PT. Panasonic
           Manufaktur
         </h1>
-        <div class="meta">
-          Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 10 menit membaca
-        </div>
+        <div class="meta">Ditulis oleh ilham, 6 Juni 2026</div>
         <img
           class="article-img"
           src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=1200&q=80"
@@ -660,7 +784,7 @@
           harus cepat berinovasi dan responsif terhadap perubahan pasar.”
         </div>
 
-        <h2>Evaluasi Kritis Sebagai Mahasiswa</h2>
+        <h2>Evaluasi Sebagai Mahasiswa</h2>
         <p>
           Menurut saya, kekuatan terbesar Panasonic terletak pada kualitas
           produk dan reputasi merek yang telah dibangun selama puluhan tahun.
@@ -744,9 +868,7 @@
       <main class="article-box">
         <span class="tag">Business Process</span>
         <h1>Mengapa Evaluasi Proses Bisnis Penting bagi Perusahaan?</h1>
-        <div class="meta">
-          Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 7 menit membaca
-        </div>
+        <div class="meta">Ditulis oleh ilham, 6 Juni 2026</div>
         <img
           class="article-img"
           src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80"
@@ -779,11 +901,11 @@
           “Evaluasi proses bisnis bukan hanya mencari kesalahan, tetapi memahami
           akar masalah agar perusahaan mampu berkembang.”
         </div>
-        <h2>Pandangan Mahasiswa Kritis</h2>
+        <h2>Pandangan sebagai Mahasiswa</h2>
         <p>
-          Sebagai mahasiswa yang berpikir kritis, saya melihat bahwa evaluasi
-          proses bisnis bukan hanya berfungsi untuk mencari kesalahan, tetapi
-          lebih kepada upaya memahami akar masalah yang sebenarnya.
+          Sebagai mahasiswa, saya melihat bahwa evaluasi proses bisnis bukan
+          hanya berfungsi untuk mencari kesalahan, tetapi lebih kepada upaya
+          memahami akar masalah yang sebenarnya.
         </p>
         <p>
           Banyak perusahaan gagal bukan karena tidak memiliki produk yang bagus,
@@ -848,7 +970,7 @@
           saat ini. Oleh karena itu evaluasi menjadi alat bagi perusahaan untuk
           terus beradaptasi.
         </p>
-        <h2>Pandangan Kritis</h2>
+        <h2>Pandangan sebagai Mahasiswa</h2>
         <p>
           Menurut saya, perusahaan yang tidak melakukan evaluasi proses bisnis
           sebenarnya sedang mengambil risiko besar. Mereka mungkin merasa
@@ -868,9 +990,7 @@
       <main class="article-box">
         <span class="tag">Business Process</span>
         <h1>Perbedaan Evaluasi dan Pengoptimalan Proses Bisnis</h1>
-        <div class="meta">
-          Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 6 menit membaca
-        </div>
+        <div class="meta">Ditulis oleh ilham, 6 Juni 2026</div>
         <img
           class="article-img"
           src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80"
@@ -940,7 +1060,7 @@
           <li>Menambah petugas pada jam sibuk.</li>
           <li>Mengintegrasikan data pasien secara otomatis.</li>
         </ul>
-        <h2>Pandangan Kritis</h2>
+        <h2>Pandangan sebagaiMahasiswa</h2>
         <p>
           Menurut saya, kesalahan yang sering dilakukan perusahaan adalah
           langsung melakukan pengoptimalan tanpa evaluasi yang mendalam.
@@ -961,9 +1081,7 @@
       <main class="article-box">
         <span class="tag">Technology</span>
         <h1>Cara Teknologi Membantu Pengoptimalan Proses Bisnis</h1>
-        <div class="meta">
-          Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 5 menit membaca
-        </div>
+        <div class="meta">Ditulis oleh ilham, 6 Juni 2026</div>
         <img
           class="article-img"
           src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
@@ -986,7 +1104,7 @@
           “Teknologi bukan solusi ajaib. Jika proses bisnis dasarnya masih
           kacau, teknologi hanya akan mempercepat kekacauan tersebut.”
         </div>
-        <h2>Pandangan Kritis</h2>
+        <h2>Pandangan sebagai Mahasiswa</h2>
         <p>
           Namun secara kritis, teknologi bukan solusi ajaib. Jika proses bisnis
           dasarnya masih kacau, teknologi hanya akan mempercepat kekacauan
@@ -1009,9 +1127,7 @@
       <main class="article-box">
         <span class="tag">Business Risk</span>
         <h1>Dampak Jika Perusahaan Tidak Melakukan Evaluasi Proses Bisnis</h1>
-        <div class="meta">
-          Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 6 menit membaca
-        </div>
+        <div class="meta">Ditulis oleh ilham, 6 Juni 2026</div>
         <img
           class="article-img"
           src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80"
@@ -1077,7 +1193,7 @@
           <li>Keputusan menjadi kurang akurat.</li>
           <li>Strategi bisnis berisiko gagal.</li>
         </ul>
-        <h2>Pandangan Kritis</h2>
+        <h2>Pandangan sebagai Mahasiswa</h2>
         <p>
           Menurut saya, ancaman terbesar bukanlah kerugian finansial, melainkan
           munculnya budaya organisasi yang merasa "semua baik-baik saja".
@@ -1095,9 +1211,7 @@
       <main class="article-box">
         <span class="tag">Daily Process</span>
         <h1>Contoh Pengoptimalan Proses Bisnis dalam Kehidupan Sehari-hari</h1>
-        <div class="meta">
-          Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 6 menit membaca
-        </div>
+        <div class="meta">Ditulis oleh ilham, 6 Juni 2026</div>
         <img
           class="article-img"
           src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80"
@@ -1151,7 +1265,7 @@
           <li>Pelanggan lebih puas.</li>
           <li>Pengelolaan keuangan lebih mudah.</li>
         </ul>
-        <h2>Analisis Kritis</h2>
+        <h2>Analisis sebagai Mahasiswa</h2>
         <p>
           Menurut saya, inti dari pengoptimalan bukan membuat proses menjadi
           lebih rumit atau lebih canggih, tetapi membuat proses menjadi lebih
@@ -1171,11 +1285,52 @@
       </main>
     </div>
 
-    <footer>
-      © 2026 BlogVerse. Dibuat dengan desain modern dan aesthetic.
-    </footer>
+    <footer>© 2026 HamBlog</footer>
 
     <script>
+      let currentVisitorName = "Modern & Aesthetic";
+
+      function updateVisitorName(name) {
+        currentVisitorName = name;
+        const visitorNameElement = document.getElementById("visitorName");
+        if (visitorNameElement) {
+          visitorNameElement.textContent = name;
+        }
+      }
+
+      function hideNameModal() {
+        const nameModal = document.getElementById("nameModal");
+        if (nameModal) {
+          nameModal.classList.remove("active");
+          nameModal.setAttribute("aria-hidden", "true");
+        }
+      }
+
+      function showNameModal() {
+        const nameModal = document.getElementById("nameModal");
+        const visitorNameInput = document.getElementById("visitorNameInput");
+        if (nameModal) {
+          nameModal.classList.add("active");
+          nameModal.setAttribute("aria-hidden", "false");
+        }
+        if (visitorNameInput) {
+          visitorNameInput.focus();
+        }
+      }
+
+      function saveVisitorName() {
+        const visitorNameInput = document.getElementById("visitorNameInput");
+        const visitorName = visitorNameInput?.value.trim() || "Pengunjung";
+
+        updateVisitorName(visitorName);
+        hideNameModal();
+      }
+
+      function askVisitorName() {
+        updateVisitorName("Modern & Aesthetic");
+        showNameModal();
+      }
+
       function hideAllPages() {
         document.getElementById("homePage").style.display = "none";
         document.getElementById("articlePage1").style.display = "none";
@@ -1220,6 +1375,25 @@
         document.getElementById("homePage").style.display = "block";
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const visitorNameSubmit = document.getElementById("visitorNameSubmit");
+        const visitorNameInput = document.getElementById("visitorNameInput");
+
+        if (visitorNameSubmit) {
+          visitorNameSubmit.addEventListener("click", saveVisitorName);
+        }
+
+        if (visitorNameInput) {
+          visitorNameInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+              saveVisitorName();
+            }
+          });
+        }
+
+        askVisitorName();
+      });
     </script>
   </body>
 </html>

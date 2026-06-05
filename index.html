@@ -1,469 +1,1225 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BlogVerse - Proses Bisnis</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",Arial,sans-serif}
-    body{background:linear-gradient(135deg,#f7f4ff,#eef7ff);color:#222;line-height:1.8}
-    header{padding:25px 8%;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.75);backdrop-filter:blur(20px);position:sticky;top:0;z-index:10;box-shadow:0 10px 30px rgba(0,0,0,.05)}
-    .logo{font-size:26px;font-weight:800;color:#6c4df6}
-    nav a{margin-left:25px;text-decoration:none;color:#333;font-weight:500;cursor:pointer}
-    .hero{padding:90px 8%;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
-    .hero h1{font-size:58px;line-height:1.1;margin-bottom:20px}
-    .hero h1 span{color:#6c4df6}
-    .hero p{font-size:18px;color:#666;margin-bottom:30px}
-    .btn,.back{display:inline-block;padding:14px 28px;background:#6c4df6;color:white;border-radius:30px;border:none;cursor:pointer;font-weight:600;box-shadow:0 10px 25px rgba(108,77,246,.3)}
-    .hero-card,.post,.article-box{background:rgba(255,255,255,.9);border-radius:30px;overflow:hidden;box-shadow:0 25px 50px rgba(0,0,0,.08)}
-    .hero-card img{width:100%;height:340px;object-fit:cover}
-    .hero-card div{padding:25px}
-    .section{padding:40px 8%}
-    .section-title{font-size:34px;margin-bottom:30px}
-    .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px}
-    .post{transition:.3s}
-    .post:hover{transform:translateY(-8px)}
-    .post img{width:100%;height:190px;object-fit:cover}
-    .post-content{padding:22px}
-    .tag{display:inline-block;padding:6px 14px;background:#eee8ff;color:#6c4df6;border-radius:20px;font-size:13px;margin-bottom:12px;font-weight:600}
-    .post h3{margin-bottom:12px;font-size:22px}
-    .post p{color:#666;margin-bottom:18px}
-    .read-more{color:#6c4df6;text-decoration:none;font-weight:700;cursor:pointer}
-    .newsletter{margin:60px 8%;padding:50px;text-align:center;background:linear-gradient(135deg,#6c4df6,#9b7cff);color:white;border-radius:35px}
-    .newsletter h2{font-size:36px;margin-bottom:15px}
-    .newsletter input{margin-top:25px;padding:15px 20px;width:280px;border:none;border-radius:25px;outline:none}
-    .newsletter button{padding:15px 25px;border:none;border-radius:25px;background:#111;color:white;cursor:pointer;margin-left:10px;font-weight:600}
-    #articlePage1,#articlePage2,#articlePage3,#articlePage4,#articlePage5,#articlePage6{display:none;padding:60px 8%}
-    .article-box{max-width:950px;margin:auto;padding:45px}
-    .article-box h1{font-size:42px;line-height:1.2;margin-bottom:15px}
-    .meta{color:#777;margin-bottom:30px}
-    .article-img{width:100%;height:420px;object-fit:cover;border-radius:28px;margin-bottom:30px}
-    .article-box p{font-size:18px;color:#555;margin-bottom:22px}
-    .article-box h2{font-size:28px;margin:35px 0 15px}
-    .article-box h3{font-size:23px;margin:28px 0 12px}
-    .quote{padding:25px;background:#f3efff;border-left:6px solid #6c4df6;border-radius:18px;font-size:19px;color:#444;margin:30px 0}
-    ul{margin:15px 0 25px 25px;color:#555;font-size:17px}
-    ul li{margin-bottom:8px}
-    footer{text-align:center;padding:35px;color:#666}
-    @media(max-width:768px){
-      header{flex-direction:column;gap:15px}
-      nav a{margin:8px}
-      .hero{grid-template-columns:1fr;padding-top:50px}
-      .hero h1{font-size:40px}
-      .article-box{padding:28px}
-      .article-box h1{font-size:32px}
-      .article-img{height:260px}
-      .newsletter input{width:100%}
-      .newsletter button{margin-top:12px;margin-left:0;width:100%}
-    }
-  </style>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlogVerse - Proses Bisnis</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", Arial, sans-serif;
+      }
+      body {
+        background: linear-gradient(135deg, #f7f4ff, #eef7ff);
+        color: #222;
+        line-height: 1.8;
+      }
+      header {
+        padding: 25px 8%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(20px);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      }
+      .logo {
+        font-size: 26px;
+        font-weight: 800;
+        color: #6c4df6;
+      }
+      nav a {
+        margin-left: 25px;
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      .hero {
+        padding: 90px 8%;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+      .hero h1 {
+        font-size: 58px;
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+      .hero h1 span {
+        color: #6c4df6;
+      }
+      .hero p {
+        font-size: 18px;
+        color: #666;
+        margin-bottom: 30px;
+      }
+      .btn,
+      .back {
+        display: inline-block;
+        padding: 14px 28px;
+        background: #6c4df6;
+        color: white;
+        border-radius: 30px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        box-shadow: 0 10px 25px rgba(108, 77, 246, 0.3);
+      }
+      .hero-card,
+      .post,
+      .article-box {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+      }
+      .hero-card img {
+        width: 100%;
+        height: 340px;
+        object-fit: cover;
+      }
+      .hero-card div {
+        padding: 25px;
+      }
+      .section {
+        padding: 40px 8%;
+      }
+      .section-title {
+        font-size: 34px;
+        margin-bottom: 30px;
+      }
+      .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+      }
+      .post {
+        transition: 0.3s;
+      }
+      .post:hover {
+        transform: translateY(-8px);
+      }
+      .post img {
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+      }
+      .post-content {
+        padding: 22px;
+      }
+      .tag {
+        display: inline-block;
+        padding: 6px 14px;
+        background: #eee8ff;
+        color: #6c4df6;
+        border-radius: 20px;
+        font-size: 13px;
+        margin-bottom: 12px;
+        font-weight: 600;
+      }
+      .post h3 {
+        margin-bottom: 12px;
+        font-size: 22px;
+      }
+      .post p {
+        color: #666;
+        margin-bottom: 18px;
+      }
+      .read-more {
+        color: #6c4df6;
+        text-decoration: none;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .newsletter {
+        max-width: 760px;
+        margin: 60px auto;
+        padding: 32px 36px;
+        text-align: left;
+        background: linear-gradient(135deg, #6c4df6 0%, #8f6ffb 60%);
+        color: white;
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(108, 77, 246, 0.12);
+      }
+      .newsletter h2 {
+        font-size: 20px;
+        margin: 0 0 8px;
+        font-weight: 700;
+      }
+      .newsletter .sub {
+        font-size: 14px;
+        opacity: 0.95;
+        margin-bottom: 16px;
+        color: rgba(255, 255, 255, 0.95);
+      }
+      .newsletter .author-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px 18px;
+        align-items: start;
+      }
+      .newsletter .author-list p {
+        margin: 6px 0;
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.95);
+      }
+      .newsletter a {
+        color: rgba(255, 255, 255, 0.95);
+        text-decoration: underline;
+      }
+      .newsletter .note {
+        font-size: 13px;
+        margin-top: 12px;
+        color: rgba(255, 255, 255, 0.85);
+      }
+      #articlePage1,
+      #articlePage2,
+      #articlePage3,
+      #articlePage4,
+      #articlePage5,
+      #articlePage6 {
+        display: none;
+        padding: 60px 8%;
+      }
+      .article-box {
+        max-width: 950px;
+        margin: auto;
+        padding: 45px;
+      }
+      .article-box h1 {
+        font-size: 42px;
+        line-height: 1.2;
+        margin-bottom: 15px;
+      }
+      .meta {
+        color: #777;
+        margin-bottom: 30px;
+      }
+      .article-img {
+        width: 100%;
+        height: 420px;
+        object-fit: cover;
+        border-radius: 28px;
+        margin-bottom: 30px;
+      }
+      .article-box p {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 22px;
+      }
+      .article-box h2 {
+        font-size: 28px;
+        margin: 35px 0 15px;
+      }
+      .article-box h3 {
+        font-size: 23px;
+        margin: 28px 0 12px;
+      }
+      .quote {
+        padding: 25px;
+        background: #f3efff;
+        border-left: 6px solid #6c4df6;
+        border-radius: 18px;
+        font-size: 19px;
+        color: #444;
+        margin: 30px 0;
+      }
+      ul {
+        margin: 15px 0 25px 25px;
+        color: #555;
+        font-size: 17px;
+      }
+      ul li {
+        margin-bottom: 8px;
+      }
+      footer {
+        text-align: center;
+        padding: 35px;
+        color: #666;
+      }
+      @media (max-width: 768px) {
+        header {
+          flex-direction: column;
+          gap: 15px;
+        }
+        nav a {
+          margin: 8px;
+        }
+        .hero {
+          grid-template-columns: 1fr;
+          padding-top: 50px;
+        }
+        .hero h1 {
+          font-size: 40px;
+        }
+        .article-box {
+          padding: 28px;
+        }
+        .article-box h1 {
+          font-size: 32px;
+        }
+        .article-img {
+          height: 260px;
+        }
+        .newsletter {
+          padding: 28px;
+          text-align: center;
+        }
+        .newsletter .author-list {
+          grid-template-columns: 1fr;
+        }
+        .newsletter h2 {
+          font-size: 24px;
+        }
+        .newsletter .sub {
+          font-size: 15px;
+        }
+      }
+    </style>
+  </head>
 
-<body>
-<header>
-  <div class="logo">BlogVerse</div>
-  <nav>
-    <a onclick="backHome()">Home</a>
-    <a onclick="backHome()">Artikel</a>
-    <a>Kategori</a>
-    <a>Tentang</a>
-  </nav>
-</header>
+  <body>
+    <header>
+      <div class="logo">BlogVerse</div>
+      <nav>
+        <a onclick="backHome()">Home</a>
+        <a onclick="backHome()">Artikel</a>
+        <a>Kategori</a>
+        <a>Tentang</a>
+      </nav>
+    </header>
 
-<div id="homePage">
-  <section class="hero">
-    <div>
-      <h1>Blog Proses Bisnis yang <span>Modern & Aesthetic</span></h1>
-      <p>Website blog dengan tampilan elegan, clean, dan menarik seperti Blogspot, tetapi dibuat lebih modern dan nyaman dibaca.</p>
-      <button class="btn" onclick="showArticle1()">Mulai Membaca</button>
+    <div id="homePage">
+      <section class="hero">
+        <div>
+          <h1>Blog Proses Bisnis yang <span>Modern & Aesthetic</span></h1>
+          <p>
+            Website blog dengan tampilan elegan, clean, dan menarik seperti
+            Blogspot, tetapi dibuat lebih modern dan nyaman dibaca.
+          </p>
+          <button class="btn" onclick="showArticle1()">Mulai Membaca</button>
+        </div>
+        <div class="hero-card">
+          <img
+            src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=900&q=80"
+          />
+          <div>
+            <span class="tag">Featured</span>
+            <h3>
+              Menganalisa Evaluasi Proses Bisnis pada PT. Panasonic Manufaktur
+            </h3>
+            <p>
+              Analisis SWOT untuk melihat kekuatan, kelemahan, peluang, dan
+              ancaman Panasonic.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Artikel Terbaru</h2>
+        <div class="blog-grid">
+          <div class="post">
+            <img
+              src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=900&q=80"
+            />
+            <div class="post-content">
+              <span class="tag">SWOT Analysis</span>
+              <h3>
+                Menganalisa Evaluasi Proses Bisnis pada PT. Panasonic Manufaktur
+              </h3>
+              <p>
+                Analisis proses bisnis Panasonic menggunakan SWOT untuk melihat
+                kekuatan, kelemahan, peluang, dan ancaman.
+              </p>
+              <a class="read-more" onclick="showArticle1()"
+                >Baca Selengkapnya →</a
+              >
+            </div>
+          </div>
+
+          <div class="post">
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80"
+            />
+            <div class="post-content">
+              <span class="tag">Business Process</span>
+              <h3>Mengapa Evaluasi Proses Bisnis Penting bagi Perusahaan?</h3>
+              <p>
+                Evaluasi proses bisnis penting agar perusahaan mengetahui apakah
+                aktivitasnya sudah efektif dan efisien.
+              </p>
+              <a class="read-more" onclick="showArticle2()"
+                >Baca Selengkapnya →</a
+              >
+            </div>
+          </div>
+
+          <div class="post">
+            <img
+              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80"
+            />
+            <div class="post-content">
+              <span class="tag">Business Process</span>
+              <h3>Perbedaan Evaluasi dan Pengoptimalan Proses Bisnis</h3>
+              <p>
+                Banyak orang menganggap evaluasi dan pengoptimalan adalah hal
+                yang sama, padahal keduanya berbeda.
+              </p>
+              <a class="read-more" onclick="showArticle3()"
+                >Baca Selengkapnya →</a
+              >
+            </div>
+          </div>
+
+          <div class="post">
+            <img
+              src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"
+            />
+            <div class="post-content">
+              <span class="tag">Technology</span>
+              <h3>Cara Teknologi Membantu Pengoptimalan Proses Bisnis</h3>
+              <p>
+                Teknologi membantu proses bisnis menjadi lebih cepat, akurat,
+                terukur, dan mudah dikontrol.
+              </p>
+              <a class="read-more" onclick="showArticle4()"
+                >Baca Selengkapnya →</a
+              >
+            </div>
+          </div>
+
+          <div class="post">
+            <img
+              src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80"
+            />
+            <div class="post-content">
+              <span class="tag">Business Risk</span>
+              <h3>
+                Dampak Jika Perusahaan Tidak Melakukan Evaluasi Proses Bisnis
+              </h3>
+              <p>
+                Tidak melakukan evaluasi dapat menyebabkan pemborosan, pelanggan
+                kecewa, dan perusahaan sulit bersaing.
+              </p>
+              <a class="read-more" onclick="showArticle5()"
+                >Baca Selengkapnya →</a
+              >
+            </div>
+          </div>
+
+          <div class="post">
+            <img
+              src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=80"
+            />
+            <div class="post-content">
+              <span class="tag">Daily Process</span>
+              <h3>
+                Contoh Pengoptimalan Proses Bisnis dalam Kehidupan Sehari-hari
+              </h3>
+              <p>
+                Pengoptimalan proses bisnis juga dapat ditemukan dalam aktivitas
+                sederhana seperti kantin kampus.
+              </p>
+              <a class="read-more" onclick="showArticle6()"
+                >Baca Selengkapnya →</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="newsletter">
+        <h2>Tugas Kuliah — MK Manajemen Proses Bisnis</h2>
+        <div class="sub">
+          Prodi Sistem Informasi — Universitas Indraprasta PGRI (Unindra)
+        </div>
+        <div class="author-list">
+          <p>
+            <strong>Dosen Pengampu</strong><br />Dieni Mulyasari, S.T., M.M.
+          </p>
+          <p><strong>Nama</strong><br />Ilham Ramadani</p>
+          <p><strong>NPM</strong><br />202533500298</p>
+          <p>
+            <strong>Link PMBK</strong><br /><a
+              href="https://pmb.unindra.ac.id/"
+              target="_blank"
+              rel="noopener"
+              >pmb.unindra.ac.id</a
+            >
+            (kode ref 2107)
+          </p>
+        </div>
+        <div class="note">Tugas untuk mata kuliah Manajemen Proses Bisnis.</div>
+      </section>
     </div>
-    <div class="hero-card">
-      <img src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=900&q=80">
-      <div>
-        <span class="tag">Featured</span>
-        <h3>Menganalisa Evaluasi Proses Bisnis pada PT. Panasonic Manufaktur</h3>
-        <p>Analisis SWOT untuk melihat kekuatan, kelemahan, peluang, dan ancaman Panasonic.</p>
-      </div>
+
+    <div id="articlePage1">
+      <main class="article-box">
+        <span class="tag">SWOT Analysis</span>
+        <h1>
+          Menganalisa Evaluasi Proses Bisnis pada Perusahaan PT. Panasonic
+          Manufaktur
+        </h1>
+        <div class="meta">
+          Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 10 menit membaca
+        </div>
+        <img
+          class="article-img"
+          src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=1200&q=80"
+        />
+
+        <h2>Pendahuluan</h2>
+        <p>
+          PT Panasonic merupakan salah satu perusahaan elektronik terbesar di
+          dunia yang bergerak dalam produksi dan distribusi berbagai produk
+          elektronik seperti televisi, kulkas, mesin cuci, AC, kamera, baterai,
+          dan peralatan rumah tangga lainnya.
+        </p>
+        <p>
+          Dalam menghadapi persaingan global yang semakin ketat, Panasonic perlu
+          melakukan evaluasi proses bisnis secara berkala agar dapat
+          mempertahankan kualitas produk, meningkatkan efisiensi operasional,
+          dan memenuhi kebutuhan pelanggan.
+        </p>
+        <p>
+          Salah satu metode yang dapat digunakan untuk mengevaluasi proses
+          bisnis Panasonic adalah SWOT Analysis, yaitu analisis Strengths,
+          Weaknesses, Opportunities, dan Threats. Metode ini membantu perusahaan
+          mengidentifikasi faktor internal dan eksternal yang mempengaruhi
+          kinerja bisnis.
+        </p>
+
+        <h2>Profil Singkat Perusahaan</h2>
+        <ul>
+          <li><strong>Nama Perusahaan:</strong> Panasonic Corporation</li>
+          <li><strong>Bidang Usaha:</strong> Elektronik dan Teknologi</li>
+          <li>
+            <strong>Produk Utama:</strong> Televisi, AC, mesin cuci, kulkas,
+            kamera, baterai, dan peralatan rumah tangga.
+          </li>
+          <li>
+            <strong>Target Pasar:</strong> Rumah tangga, perkantoran, dan
+            industri.
+          </li>
+        </ul>
+
+        <h2>Gambaran Proses Bisnis Panasonic</h2>
+        <ul>
+          <li>
+            <strong>Pengadaan Bahan Baku:</strong> perusahaan membeli komponen
+            elektronik, plastik, logam, dan bahan pendukung lainnya dari
+            supplier.
+          </li>
+          <li>
+            <strong>Produksi:</strong> bahan baku diproses menjadi produk jadi
+            melalui sistem manufaktur yang terstandarisasi.
+          </li>
+          <li>
+            <strong>Quality Control:</strong> produk yang selesai diproduksi
+            diperiksa kualitasnya sebelum dipasarkan.
+          </li>
+          <li>
+            <strong>Distribusi:</strong> produk dikirim ke distributor, toko
+            elektronik, dan marketplace.
+          </li>
+          <li>
+            <strong>Penjualan:</strong> produk dijual kepada konsumen akhir.
+          </li>
+          <li>
+            <strong>Layanan Purna Jual:</strong> Panasonic menyediakan garansi
+            dan layanan servis untuk meningkatkan kepuasan pelanggan.
+          </li>
+        </ul>
+
+        <h2>Analisis SWOT Panasonic</h2>
+
+        <h3>A. Strengths atau Kekuatan</h3>
+        <h3>1. Merek yang Sudah Mendunia</h3>
+        <p>
+          Panasonic memiliki reputasi yang sangat kuat dan telah dipercaya
+          masyarakat selama puluhan tahun.
+        </p>
+        <ul>
+          <li>Meningkatkan kepercayaan konsumen.</li>
+          <li>Mempermudah pemasaran produk baru.</li>
+          <li>Memiliki loyalitas pelanggan yang tinggi.</li>
+        </ul>
+
+        <h3>2. Kualitas Produk Tinggi</h3>
+        <p>Panasonic dikenal memiliki standar kualitas yang ketat.</p>
+        <ul>
+          <li>Tingkat kerusakan produk rendah.</li>
+          <li>Kepuasan pelanggan tinggi.</li>
+          <li>Mengurangi biaya perbaikan dan klaim garansi.</li>
+        </ul>
+
+        <h3>3. Teknologi Produksi Modern</h3>
+        <p>
+          Panasonic menggunakan sistem otomatisasi dan teknologi manufaktur
+          canggih.
+        </p>
+        <ul>
+          <li>Produksi lebih cepat.</li>
+          <li>Mengurangi kesalahan manusia.</li>
+          <li>Efisiensi biaya produksi meningkat.</li>
+        </ul>
+
+        <h3>4. Jaringan Distribusi Luas</h3>
+        <p>
+          Produk Panasonic tersedia hampir di seluruh wilayah Indonesia maupun
+          dunia.
+        </p>
+        <ul>
+          <li>Produk mudah ditemukan konsumen.</li>
+          <li>Memperluas pangsa pasar.</li>
+        </ul>
+
+        <h3>5. Layanan Purna Jual yang Baik</h3>
+        <p>Panasonic memiliki banyak pusat servis resmi.</p>
+        <ul>
+          <li>Meningkatkan kepuasan pelanggan.</li>
+          <li>Menjaga citra perusahaan.</li>
+        </ul>
+
+        <h3>B. Weaknesses atau Kelemahan</h3>
+        <ul>
+          <li>
+            <strong>Harga produk relatif mahal:</strong> konsumen sensitif harga
+            dapat beralih ke merek lain dan Panasonic sulit bersaing pada segmen
+            ekonomi bawah.
+          </li>
+          <li>
+            <strong>Proses produksi membutuhkan biaya besar:</strong> standar
+            kualitas tinggi menyebabkan biaya operasional meningkat dan harga
+            jual menjadi lebih tinggi.
+          </li>
+          <li>
+            <strong>Ketergantungan pada supplier komponen:</strong> dapat
+            menimbulkan risiko keterlambatan produksi dan kenaikan harga bahan
+            baku.
+          </li>
+          <li>
+            <strong>Adaptasi terhadap tren digital kadang lebih lambat:</strong>
+            beberapa kompetitor lebih cepat mengembangkan fitur berbasis AI dan
+            IoT.
+          </li>
+        </ul>
+
+        <h3>C. Opportunities atau Peluang</h3>
+        <ul>
+          <li>
+            <strong>Pertumbuhan Smart Home:</strong> membuka pasar baru melalui
+            Smart AC, Smart TV, dan Smart Refrigerator.
+          </li>
+          <li>
+            <strong>Perkembangan Internet of Things:</strong> Panasonic dapat
+            mengintegrasikan produknya dengan aplikasi digital.
+          </li>
+          <li>
+            <strong>Peningkatan permintaan peralatan hemat energi:</strong>
+            produk hemat energi memiliki daya tarik tinggi bagi konsumen.
+          </li>
+          <li>
+            <strong>Ekspansi pasar digital:</strong> marketplace seperti Shopee,
+            Tokopedia, dan Lazada dapat meningkatkan penjualan dan memperluas
+            jangkauan pasar.
+          </li>
+        </ul>
+
+        <h3>D. Threats atau Ancaman</h3>
+        <ul>
+          <li>
+            <strong>Persaingan sangat ketat:</strong> Panasonic bersaing dengan
+            Samsung, LG, Xiaomi, dan Sharp.
+          </li>
+          <li>
+            <strong>Perubahan teknologi yang cepat:</strong> produk dapat cepat
+            usang jika perusahaan lambat berinovasi.
+          </li>
+          <li>
+            <strong>Krisis ekonomi global:</strong> daya beli masyarakat dapat
+            turun sehingga penjualan produk elektronik menurun.
+          </li>
+          <li>
+            <strong>Gangguan rantai pasok:</strong> konflik geopolitik, pandemi,
+            atau bencana alam dapat mengganggu produksi dan distribusi bahan
+            baku.
+          </li>
+        </ul>
+
+        <div class="quote">
+          “Kualitas produk saja tidak cukup. Di era digital, perusahaan juga
+          harus cepat berinovasi dan responsif terhadap perubahan pasar.”
+        </div>
+
+        <h2>Evaluasi Kritis Sebagai Mahasiswa</h2>
+        <p>
+          Menurut saya, kekuatan terbesar Panasonic terletak pada kualitas
+          produk dan reputasi merek yang telah dibangun selama puluhan tahun.
+          Namun, di era digital saat ini kualitas saja tidak cukup. Perusahaan
+          harus mampu beradaptasi dengan perubahan teknologi yang sangat cepat.
+        </p>
+        <p>
+          Salah satu masalah yang perlu diperhatikan adalah kecepatan inovasi.
+          Saat ini banyak perusahaan elektronik yang menawarkan fitur berbasis
+          Artificial Intelligence, Internet of Things, dan integrasi aplikasi
+          mobile dengan harga yang lebih kompetitif. Jika Panasonic tidak
+          mempercepat inovasi, maka konsumen generasi muda dapat beralih ke
+          merek lain yang dianggap lebih modern.
+        </p>
+        <p>
+          Selain itu, ketergantungan pada supplier tertentu juga menjadi risiko
+          besar. Gangguan rantai pasok dapat menghambat proses produksi dan
+          menyebabkan keterlambatan distribusi produk ke pasar.
+        </p>
+        <p>
+          Dari sisi proses bisnis, Panasonic sudah memiliki sistem produksi yang
+          efisien dan terstandarisasi, tetapi perlu meningkatkan digitalisasi
+          dalam pengelolaan data produksi, prediksi permintaan pasar, dan
+          manajemen inventori agar lebih responsif terhadap perubahan kebutuhan
+          konsumen.
+        </p>
+
+        <h2>Rekomendasi Perbaikan</h2>
+        <h3>Jangka Pendek</h3>
+        <ul>
+          <li>Memperkuat penjualan melalui marketplace dan e-commerce.</li>
+          <li>Meningkatkan promosi produk hemat energi.</li>
+          <li>Mengoptimalkan sistem manajemen persediaan berbasis data.</li>
+        </ul>
+
+        <h3>Jangka Menengah</h3>
+        <ul>
+          <li>Mengembangkan produk berbasis AI dan IoT.</li>
+          <li>Mengurangi ketergantungan pada satu supplier.</li>
+          <li>
+            Mengintegrasikan sistem ERP untuk meningkatkan efisiensi proses
+            bisnis.
+          </li>
+        </ul>
+
+        <h3>Jangka Panjang</h3>
+        <ul>
+          <li>
+            Investasi pada riset dan pengembangan teknologi ramah lingkungan.
+          </li>
+          <li>Membangun ekosistem Smart Home Panasonic.</li>
+          <li>
+            Memanfaatkan Big Data dan Artificial Intelligence untuk analisis
+            perilaku konsumen.
+          </li>
+        </ul>
+
+        <h2>Kesimpulan</h2>
+        <p>
+          Berdasarkan analisis SWOT, Panasonic memiliki kekuatan utama berupa
+          reputasi merek yang kuat, kualitas produk tinggi, teknologi produksi
+          modern, dan jaringan distribusi yang luas. Namun perusahaan juga
+          menghadapi beberapa kelemahan seperti harga produk yang relatif
+          tinggi, biaya produksi besar, serta tantangan dalam mengikuti
+          perkembangan teknologi yang sangat cepat.
+        </p>
+        <p>
+          Peluang terbesar Panasonic berada pada pertumbuhan pasar Smart Home,
+          IoT, dan produk hemat energi. Di sisi lain, ancaman utama berasal dari
+          persaingan global, perubahan teknologi yang cepat, serta gangguan
+          rantai pasok. Oleh karena itu, Panasonic perlu terus melakukan
+          inovasi, mempercepat transformasi digital, dan meningkatkan efisiensi
+          proses bisnis agar tetap kompetitif di pasar global.
+        </p>
+
+        <button class="back" onclick="backHome()">← Kembali ke Beranda</button>
+      </main>
     </div>
-  </section>
 
-  <section class="section">
-    <h2 class="section-title">Artikel Terbaru</h2>
-    <div class="blog-grid">
-      <div class="post">
-        <img src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=900&q=80">
-        <div class="post-content">
-          <span class="tag">SWOT Analysis</span>
-          <h3>Menganalisa Evaluasi Proses Bisnis pada PT. Panasonic Manufaktur</h3>
-          <p>Analisis proses bisnis Panasonic menggunakan SWOT untuk melihat kekuatan, kelemahan, peluang, dan ancaman.</p>
-          <a class="read-more" onclick="showArticle1()">Baca Selengkapnya →</a>
+    <div id="articlePage2">
+      <main class="article-box">
+        <span class="tag">Business Process</span>
+        <h1>Mengapa Evaluasi Proses Bisnis Penting bagi Perusahaan?</h1>
+        <div class="meta">
+          Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 7 menit membaca
         </div>
-      </div>
-
-      <div class="post">
-        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80">
-        <div class="post-content">
-          <span class="tag">Business Process</span>
-          <h3>Mengapa Evaluasi Proses Bisnis Penting bagi Perusahaan?</h3>
-          <p>Evaluasi proses bisnis penting agar perusahaan mengetahui apakah aktivitasnya sudah efektif dan efisien.</p>
-          <a class="read-more" onclick="showArticle2()">Baca Selengkapnya →</a>
+        <img
+          class="article-img"
+          src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80"
+        />
+        <p>
+          Menurut saya, evaluasi proses bisnis merupakan salah satu aktivitas
+          paling penting dalam sebuah organisasi karena menjadi dasar untuk
+          mengetahui apakah seluruh kegiatan perusahaan sudah berjalan sesuai
+          tujuan atau justru mengalami penyimpangan.
+        </p>
+        <p>
+          Dalam dunia bisnis yang kompetitif, perusahaan tidak cukup hanya
+          menjalankan aktivitas operasional setiap hari, tetapi juga harus
+          memastikan bahwa setiap proses yang dilakukan benar-benar memberikan
+          nilai tambah bagi pelanggan dan perusahaan itu sendiri.
+        </p>
+        <h2>Apa Itu Evaluasi Proses Bisnis?</h2>
+        <p>
+          Secara sederhana, evaluasi proses bisnis adalah kegiatan mengukur,
+          menganalisis, dan menilai kinerja suatu proses untuk mengetahui apakah
+          proses tersebut sudah efektif, efisien, dan mampu mendukung pencapaian
+          tujuan organisasi.
+        </p>
+        <p>
+          Tanpa evaluasi, perusahaan hanya bekerja berdasarkan asumsi dan
+          kebiasaan lama tanpa mengetahui apakah cara kerja yang digunakan masih
+          relevan dengan kondisi saat ini.
+        </p>
+        <div class="quote">
+          “Evaluasi proses bisnis bukan hanya mencari kesalahan, tetapi memahami
+          akar masalah agar perusahaan mampu berkembang.”
         </div>
-      </div>
-
-      <div class="post">
-        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80">
-        <div class="post-content">
-          <span class="tag">Business Process</span>
-          <h3>Perbedaan Evaluasi dan Pengoptimalan Proses Bisnis</h3>
-          <p>Banyak orang menganggap evaluasi dan pengoptimalan adalah hal yang sama, padahal keduanya berbeda.</p>
-          <a class="read-more" onclick="showArticle3()">Baca Selengkapnya →</a>
-        </div>
-      </div>
-
-      <div class="post">
-        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80">
-        <div class="post-content">
-          <span class="tag">Technology</span>
-          <h3>Cara Teknologi Membantu Pengoptimalan Proses Bisnis</h3>
-          <p>Teknologi membantu proses bisnis menjadi lebih cepat, akurat, terukur, dan mudah dikontrol.</p>
-          <a class="read-more" onclick="showArticle4()">Baca Selengkapnya →</a>
-        </div>
-      </div>
-
-      <div class="post">
-        <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80">
-        <div class="post-content">
-          <span class="tag">Business Risk</span>
-          <h3>Dampak Jika Perusahaan Tidak Melakukan Evaluasi Proses Bisnis</h3>
-          <p>Tidak melakukan evaluasi dapat menyebabkan pemborosan, pelanggan kecewa, dan perusahaan sulit bersaing.</p>
-          <a class="read-more" onclick="showArticle5()">Baca Selengkapnya →</a>
-        </div>
-      </div>
-
-      <div class="post">
-        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=80">
-        <div class="post-content">
-          <span class="tag">Daily Process</span>
-          <h3>Contoh Pengoptimalan Proses Bisnis dalam Kehidupan Sehari-hari</h3>
-          <p>Pengoptimalan proses bisnis juga dapat ditemukan dalam aktivitas sederhana seperti kantin kampus.</p>
-          <a class="read-more" onclick="showArticle6()">Baca Selengkapnya →</a>
-        </div>
-      </div>
+        <h2>Pandangan Mahasiswa Kritis</h2>
+        <p>
+          Sebagai mahasiswa yang berpikir kritis, saya melihat bahwa evaluasi
+          proses bisnis bukan hanya berfungsi untuk mencari kesalahan, tetapi
+          lebih kepada upaya memahami akar masalah yang sebenarnya.
+        </p>
+        <p>
+          Banyak perusahaan gagal bukan karena tidak memiliki produk yang bagus,
+          melainkan karena proses bisnisnya tidak mampu mengikuti perubahan
+          lingkungan bisnis.
+        </p>
+        <h2>Contoh Kasus dalam Perusahaan</h2>
+        <p>
+          Contohnya, sebuah perusahaan e-commerce mengalami penurunan kepuasan
+          pelanggan karena pengiriman sering terlambat. Jika perusahaan hanya
+          melihat hasil akhirnya, mereka mungkin akan menyalahkan kurir.
+        </p>
+        <p>
+          Namun melalui evaluasi proses bisnis, perusahaan dapat menemukan bahwa
+          keterlambatan sebenarnya disebabkan oleh sistem pengelolaan gudang
+          yang buruk, proses verifikasi pesanan yang terlalu panjang, atau
+          kurangnya koordinasi antar divisi.
+        </p>
+        <h2>Manfaat Evaluasi Proses Bisnis</h2>
+        <h3>a. Mengidentifikasi Inefisiensi</h3>
+        <p>
+          Dalam setiap organisasi sering ditemukan aktivitas yang sebenarnya
+          tidak memberikan nilai tambah. Misalnya, proses persetujuan dokumen
+          yang harus melewati lima sampai enam level manajemen padahal cukup dua
+          level saja.
+        </p>
+        <ul>
+          <li>Waktu kerja menjadi lebih lama.</li>
+          <li>Produktivitas menurun.</li>
+          <li>Pelanggan harus menunggu lebih lama.</li>
+        </ul>
+        <h3>b. Mengurangi Biaya Operasional</h3>
+        <p>
+          Setiap aktivitas dalam proses bisnis membutuhkan biaya. Jika terdapat
+          proses yang berulang atau tidak efisien, maka biaya yang dikeluarkan
+          juga semakin besar.
+        </p>
+        <p>
+          Sebagai contoh, perusahaan masih menggunakan pencatatan manual
+          sehingga membutuhkan banyak tenaga administrasi. Setelah dievaluasi,
+          perusahaan mengimplementasikan sistem digital yang mampu mengurangi
+          biaya administrasi secara signifikan.
+        </p>
+        <h3>c. Meningkatkan Kualitas Pelayanan</h3>
+        <p>
+          Saat ini pelanggan tidak hanya membeli produk, tetapi juga membeli
+          pengalaman. Evaluasi membantu perusahaan memahami bagian mana yang
+          membuat pelanggan merasa puas atau kecewa.
+        </p>
+        <ul>
+          <li>Waktu respon customer service terlalu lama.</li>
+          <li>Sistem pembayaran sering mengalami gangguan.</li>
+          <li>Pengiriman barang tidak tepat waktu.</li>
+        </ul>
+        <h3>d. Menyesuaikan Diri dengan Perubahan</h3>
+        <p>
+          Lingkungan bisnis selalu berubah karena perkembangan teknologi,
+          perubahan perilaku konsumen, maupun munculnya kompetitor baru.
+        </p>
+        <p>
+          Proses bisnis yang efektif lima tahun lalu belum tentu masih relevan
+          saat ini. Oleh karena itu evaluasi menjadi alat bagi perusahaan untuk
+          terus beradaptasi.
+        </p>
+        <h2>Pandangan Kritis</h2>
+        <p>
+          Menurut saya, perusahaan yang tidak melakukan evaluasi proses bisnis
+          sebenarnya sedang mengambil risiko besar. Mereka mungkin merasa
+          bisnisnya baik-baik saja karena masih menghasilkan keuntungan, padahal
+          bisa jadi terdapat banyak pemborosan yang tidak disadari.
+        </p>
+        <p>
+          Dalam jangka panjang, perusahaan seperti ini akan sulit bersaing
+          dengan organisasi yang terus melakukan evaluasi dan perbaikan
+          berkelanjutan.
+        </p>
+        <button class="back" onclick="backHome()">← Kembali ke Beranda</button>
+      </main>
     </div>
-  </section>
 
-  <section class="newsletter">
-    <h2>Ikuti Update Artikel</h2>
-    <p>Dapatkan artikel terbaru langsung ke email kamu.</p>
-    <input type="email" placeholder="Masukkan email kamu">
-    <button>Subscribe</button>
-  </section>
-</div>
+    <div id="articlePage3">
+      <main class="article-box">
+        <span class="tag">Business Process</span>
+        <h1>Perbedaan Evaluasi dan Pengoptimalan Proses Bisnis</h1>
+        <div class="meta">
+          Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 6 menit membaca
+        </div>
+        <img
+          class="article-img"
+          src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80"
+        />
+        <p>
+          Banyak orang menganggap evaluasi dan pengoptimalan adalah hal yang
+          sama, padahal keduanya memiliki fungsi yang berbeda meskipun saling
+          berkaitan.
+        </p>
+        <h2>Evaluasi Proses Bisnis</h2>
+        <p>
+          Evaluasi berfokus pada kegiatan mengukur dan menganalisis kondisi
+          proses yang sedang berjalan.
+        </p>
+        <h3>Tujuan Evaluasi</h3>
+        <ul>
+          <li>Menemukan masalah.</li>
+          <li>Mengidentifikasi hambatan.</li>
+          <li>Mengetahui penyebab ketidakefisienan.</li>
+          <li>Mengukur tingkat keberhasilan proses.</li>
+        </ul>
+        <h3>Pertanyaan Saat Evaluasi</h3>
+        <ul>
+          <li>Mengapa proses ini lambat?</li>
+          <li>Di mana terjadi pemborosan?</li>
+          <li>Apa penyebab tingginya tingkat kesalahan?</li>
+          <li>Bagaimana tingkat kepuasan pelanggan?</li>
+        </ul>
+        <div class="quote">
+          “Evaluasi berfungsi untuk memahami kondisi saat ini dan menemukan akar
+          masalah yang sebenarnya.”
+        </div>
+        <h2>Pengoptimalan Proses Bisnis</h2>
+        <p>
+          Pengoptimalan merupakan tindakan lanjutan setelah evaluasi dilakukan.
+        </p>
+        <h3>Tujuan Pengoptimalan</h3>
+        <ul>
+          <li>Memperbaiki proses.</li>
+          <li>Menyederhanakan prosedur.</li>
+          <li>Menghilangkan aktivitas yang tidak perlu.</li>
+          <li>Meningkatkan efektivitas dan efisiensi.</li>
+        </ul>
+        <h3>Pertanyaan Saat Pengoptimalan</h3>
+        <ul>
+          <li>Bagaimana cara mempercepat proses?</li>
+          <li>Teknologi apa yang dapat digunakan?</li>
+          <li>Langkah mana yang bisa dihilangkan?</li>
+          <li>Bagaimana mengurangi biaya operasional?</li>
+        </ul>
+        <h2>Contoh Nyata</h2>
+        <p>
+          Misalnya sebuah rumah sakit memiliki waktu tunggu pasien rata-rata 3
+          jam.
+        </p>
+        <h3>Tahap Evaluasi</h3>
+        <ul>
+          <li>Mengumpulkan data waktu tunggu.</li>
+          <li>Menganalisis alur pelayanan pasien.</li>
+          <li>Menemukan bahwa proses registrasi masih manual.</li>
+          <li>Mengetahui jumlah petugas pendaftaran tidak mencukupi.</li>
+        </ul>
+        <h3>Tahap Pengoptimalan</h3>
+        <ul>
+          <li>Membuat sistem pendaftaran online.</li>
+          <li>Menambah mesin antrean digital.</li>
+          <li>Menambah petugas pada jam sibuk.</li>
+          <li>Mengintegrasikan data pasien secara otomatis.</li>
+        </ul>
+        <h2>Pandangan Kritis</h2>
+        <p>
+          Menurut saya, kesalahan yang sering dilakukan perusahaan adalah
+          langsung melakukan pengoptimalan tanpa evaluasi yang mendalam.
+          Akibatnya solusi yang diterapkan hanya mengatasi gejala, bukan akar
+          masalah.
+        </p>
+        <p>
+          Perusahaan sering membeli teknologi mahal karena dianggap modern,
+          padahal masalah sebenarnya berasal dari budaya kerja yang buruk atau
+          SOP yang tidak jelas. Oleh karena itu evaluasi harus selalu menjadi
+          fondasi sebelum melakukan pengoptimalan.
+        </p>
+        <button class="back" onclick="backHome()">← Kembali ke Beranda</button>
+      </main>
+    </div>
 
-<div id="articlePage1">
-  <main class="article-box">
-    <span class="tag">SWOT Analysis</span>
-    <h1>Menganalisa Evaluasi Proses Bisnis pada Perusahaan PT. Panasonic Manufaktur</h1>
-    <div class="meta">Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 10 menit membaca</div>
-    <img class="article-img" src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=1200&q=80">
+    <div id="articlePage4">
+      <main class="article-box">
+        <span class="tag">Technology</span>
+        <h1>Cara Teknologi Membantu Pengoptimalan Proses Bisnis</h1>
+        <div class="meta">
+          Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 5 menit membaca
+        </div>
+        <img
+          class="article-img"
+          src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
+        />
+        <p>
+          Teknologi membantu proses bisnis menjadi lebih cepat, akurat, terukur,
+          dan mudah dikontrol. Contohnya, sistem kasir digital dapat mencatat
+          penjualan otomatis, aplikasi stok bisa memberi peringatan jika barang
+          hampir habis, dan dashboard manajemen bisa menampilkan data penjualan
+          secara real-time.
+        </p>
+        <h2>Mengurangi Pekerjaan Manual</h2>
+        <p>
+          Teknologi juga mengurangi pekerjaan manual yang berulang. Misalnya,
+          dulu laporan penjualan dibuat manual di Excel setiap akhir hari.
+          Dengan sistem digital, laporan bisa langsung muncul otomatis. Ini
+          menghemat waktu dan mengurangi risiko salah input.
+        </p>
+        <div class="quote">
+          “Teknologi bukan solusi ajaib. Jika proses bisnis dasarnya masih
+          kacau, teknologi hanya akan mempercepat kekacauan tersebut.”
+        </div>
+        <h2>Pandangan Kritis</h2>
+        <p>
+          Namun secara kritis, teknologi bukan solusi ajaib. Jika proses bisnis
+          dasarnya masih kacau, teknologi hanya akan mempercepat kekacauan
+          tersebut.
+        </p>
+        <p>
+          Misalnya, perusahaan memakai aplikasi absensi canggih, tetapi aturan
+          kerja tidak jelas. Maka masalah utamanya tetap tidak selesai.
+        </p>
+        <h2>BPM Berbasis Teknologi</h2>
+        <p>
+          BPM berbasis teknologi dapat membantu menghilangkan duplikasi proses
+          dan bottleneck sehingga efisiensi dan produktivitas meningkat.
+        </p>
+        <button class="back" onclick="backHome()">← Kembali ke Beranda</button>
+      </main>
+    </div>
 
-    <h2>Pendahuluan</h2>
-    <p>PT Panasonic merupakan salah satu perusahaan elektronik terbesar di dunia yang bergerak dalam produksi dan distribusi berbagai produk elektronik seperti televisi, kulkas, mesin cuci, AC, kamera, baterai, dan peralatan rumah tangga lainnya.</p>
-    <p>Dalam menghadapi persaingan global yang semakin ketat, Panasonic perlu melakukan evaluasi proses bisnis secara berkala agar dapat mempertahankan kualitas produk, meningkatkan efisiensi operasional, dan memenuhi kebutuhan pelanggan.</p>
-    <p>Salah satu metode yang dapat digunakan untuk mengevaluasi proses bisnis Panasonic adalah SWOT Analysis, yaitu analisis Strengths, Weaknesses, Opportunities, dan Threats. Metode ini membantu perusahaan mengidentifikasi faktor internal dan eksternal yang mempengaruhi kinerja bisnis.</p>
+    <div id="articlePage5">
+      <main class="article-box">
+        <span class="tag">Business Risk</span>
+        <h1>Dampak Jika Perusahaan Tidak Melakukan Evaluasi Proses Bisnis</h1>
+        <div class="meta">
+          Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 6 menit membaca
+        </div>
+        <img
+          class="article-img"
+          src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80"
+        />
+        <p>
+          Menurut saya, tidak melakukan evaluasi proses bisnis sama seperti
+          seorang dokter yang tidak pernah memeriksa kondisi pasien tetapi terus
+          memberikan obat yang sama setiap hari.
+        </p>
+        <p>
+          Awalnya mungkin tidak terlihat masalah, tetapi lama-kelamaan akan
+          muncul dampak yang serius.
+        </p>
+        <div class="quote">
+          “Masalah terbesar perusahaan bukan hanya rugi, tetapi merasa semua
+          baik-baik saja padahal prosesnya sedang melemah.”
+        </div>
+        <h2>a. Pemborosan Biaya</h2>
+        <p>
+          Tanpa evaluasi, perusahaan tidak mengetahui aktivitas mana yang
+          sebenarnya tidak memberikan nilai tambah.
+        </p>
+        <ul>
+          <li>Biaya operasional meningkat.</li>
+          <li>Produktivitas menurun.</li>
+          <li>Keuntungan berkurang.</li>
+        </ul>
+        <h2>b. Menurunnya Kepuasan Pelanggan</h2>
+        <p>
+          Pelanggan saat ini memiliki banyak pilihan. Jika pelayanan lambat,
+          produk sering terlambat, dan kualitas tidak konsisten, maka pelanggan
+          akan berpindah ke kompetitor.
+        </p>
+        <ul>
+          <li>Pelayanan lambat.</li>
+          <li>Produk sering terlambat.</li>
+          <li>Kualitas tidak konsisten.</li>
+        </ul>
+        <h2>c. Sulit Bersaing</h2>
+        <p>
+          Kompetitor terus melakukan inovasi dan perbaikan. Perusahaan yang
+          tidak mengevaluasi prosesnya akan tertinggal karena menggunakan cara
+          kerja lama yang sudah tidak relevan.
+        </p>
+        <h2>d. Risiko Kesalahan Semakin Tinggi</h2>
+        <p>
+          Tanpa evaluasi, kesalahan operasional akan lebih mudah terjadi dan
+          lebih sulit dicegah.
+        </p>
+        <ul>
+          <li>Kesalahan terus berulang.</li>
+          <li>Fraud lebih sulit dideteksi.</li>
+          <li>Risiko operasional meningkat.</li>
+        </ul>
+        <h2>e. Sulit Mengambil Keputusan</h2>
+        <p>
+          Keputusan bisnis yang baik harus didasarkan pada data dan fakta. Jika
+          proses tidak pernah dievaluasi, manajemen kehilangan informasi
+          penting.
+        </p>
+        <ul>
+          <li>Manajemen kehilangan informasi penting.</li>
+          <li>Keputusan menjadi kurang akurat.</li>
+          <li>Strategi bisnis berisiko gagal.</li>
+        </ul>
+        <h2>Pandangan Kritis</h2>
+        <p>
+          Menurut saya, ancaman terbesar bukanlah kerugian finansial, melainkan
+          munculnya budaya organisasi yang merasa "semua baik-baik saja".
+        </p>
+        <p>
+          Ketika perusahaan terlalu nyaman dengan cara kerja lama, inovasi akan
+          berhenti. Pada akhirnya perusahaan bisa kehilangan daya saing dan
+          tersingkir dari pasar.
+        </p>
+        <button class="back" onclick="backHome()">← Kembali ke Beranda</button>
+      </main>
+    </div>
 
-    <h2>Profil Singkat Perusahaan</h2>
-    <ul>
-      <li><strong>Nama Perusahaan:</strong> Panasonic Corporation</li>
-      <li><strong>Bidang Usaha:</strong> Elektronik dan Teknologi</li>
-      <li><strong>Produk Utama:</strong> Televisi, AC, mesin cuci, kulkas, kamera, baterai, dan peralatan rumah tangga.</li>
-      <li><strong>Target Pasar:</strong> Rumah tangga, perkantoran, dan industri.</li>
-    </ul>
+    <div id="articlePage6">
+      <main class="article-box">
+        <span class="tag">Daily Process</span>
+        <h1>Contoh Pengoptimalan Proses Bisnis dalam Kehidupan Sehari-hari</h1>
+        <div class="meta">
+          Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 6 menit membaca
+        </div>
+        <img
+          class="article-img"
+          src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80"
+        />
+        <p>
+          Pengoptimalan proses bisnis sebenarnya tidak hanya terjadi di
+          perusahaan besar. Dalam kehidupan sehari-hari kita juga sering
+          melakukannya.
+        </p>
+        <div class="quote">
+          “Pengoptimalan bukan membuat proses menjadi lebih rumit, tetapi
+          membuat proses menjadi lebih bernilai.”
+        </div>
+        <h2>Contoh: Kantin Kampus</h2>
+        <h3>Sebelum Dioptimalkan</h3>
+        <p><strong>Proses:</strong></p>
+        <ul>
+          <li>Mahasiswa datang.</li>
+          <li>Memesan makanan.</li>
+          <li>Penjual menulis pesanan.</li>
+          <li>Pesanan diberikan ke dapur.</li>
+          <li>Pembayaran dilakukan setelah makanan selesai.</li>
+        </ul>
+        <p><strong>Masalah:</strong></p>
+        <ul>
+          <li>Antrean panjang.</li>
+          <li>Pesanan tertukar.</li>
+          <li>Pelanggan menunggu lama.</li>
+          <li>Penjual kesulitan mencatat transaksi.</li>
+        </ul>
+        <h2>Tahap Evaluasi</h2>
+        <p>Ditemukan bahwa:</p>
+        <ul>
+          <li>Pencatatan manual terlalu lambat.</li>
+          <li>Menu sering habis tanpa diketahui.</li>
+          <li>Antrean pembayaran menghambat pelayanan.</li>
+        </ul>
+        <h2>Tahap Pengoptimalan</h2>
+        <p>Solusi:</p>
+        <ul>
+          <li>Menggunakan QR Code untuk pemesanan.</li>
+          <li>Menampilkan stok makanan secara digital.</li>
+          <li>Menggunakan pembayaran QRIS.</li>
+          <li>Menggunakan sistem nomor antrean.</li>
+        </ul>
+        <h2>Hasil Setelah Dioptimalkan</h2>
+        <ul>
+          <li>Waktu tunggu berkurang.</li>
+          <li>Kesalahan pesanan menurun.</li>
+          <li>Penjualan meningkat.</li>
+          <li>Pelanggan lebih puas.</li>
+          <li>Pengelolaan keuangan lebih mudah.</li>
+        </ul>
+        <h2>Analisis Kritis</h2>
+        <p>
+          Menurut saya, inti dari pengoptimalan bukan membuat proses menjadi
+          lebih rumit atau lebih canggih, tetapi membuat proses menjadi lebih
+          bernilai.
+        </p>
+        <p>
+          Suatu proses dianggap optimal bukan karena menggunakan teknologi
+          terbaru, melainkan karena mampu menghasilkan hasil terbaik dengan
+          sumber daya seminimal mungkin.
+        </p>
+        <p>
+          Dengan kata lain, proses bisnis yang baik adalah proses yang mampu
+          menyeimbangkan efisiensi, efektivitas, kualitas pelayanan, kepuasan
+          pelanggan, dan keuntungan perusahaan secara bersamaan.
+        </p>
+        <button class="back" onclick="backHome()">← Kembali ke Beranda</button>
+      </main>
+    </div>
 
-    <h2>Gambaran Proses Bisnis Panasonic</h2>
-    <ul>
-      <li><strong>Pengadaan Bahan Baku:</strong> perusahaan membeli komponen elektronik, plastik, logam, dan bahan pendukung lainnya dari supplier.</li>
-      <li><strong>Produksi:</strong> bahan baku diproses menjadi produk jadi melalui sistem manufaktur yang terstandarisasi.</li>
-      <li><strong>Quality Control:</strong> produk yang selesai diproduksi diperiksa kualitasnya sebelum dipasarkan.</li>
-      <li><strong>Distribusi:</strong> produk dikirim ke distributor, toko elektronik, dan marketplace.</li>
-      <li><strong>Penjualan:</strong> produk dijual kepada konsumen akhir.</li>
-      <li><strong>Layanan Purna Jual:</strong> Panasonic menyediakan garansi dan layanan servis untuk meningkatkan kepuasan pelanggan.</li>
-    </ul>
+    <footer>
+      © 2026 BlogVerse. Dibuat dengan desain modern dan aesthetic.
+    </footer>
 
-    <h2>Analisis SWOT Panasonic</h2>
-
-    <h3>A. Strengths atau Kekuatan</h3>
-    <h3>1. Merek yang Sudah Mendunia</h3>
-    <p>Panasonic memiliki reputasi yang sangat kuat dan telah dipercaya masyarakat selama puluhan tahun.</p>
-    <ul>
-      <li>Meningkatkan kepercayaan konsumen.</li>
-      <li>Mempermudah pemasaran produk baru.</li>
-      <li>Memiliki loyalitas pelanggan yang tinggi.</li>
-    </ul>
-
-    <h3>2. Kualitas Produk Tinggi</h3>
-    <p>Panasonic dikenal memiliki standar kualitas yang ketat.</p>
-    <ul>
-      <li>Tingkat kerusakan produk rendah.</li>
-      <li>Kepuasan pelanggan tinggi.</li>
-      <li>Mengurangi biaya perbaikan dan klaim garansi.</li>
-    </ul>
-
-    <h3>3. Teknologi Produksi Modern</h3>
-    <p>Panasonic menggunakan sistem otomatisasi dan teknologi manufaktur canggih.</p>
-    <ul>
-      <li>Produksi lebih cepat.</li>
-      <li>Mengurangi kesalahan manusia.</li>
-      <li>Efisiensi biaya produksi meningkat.</li>
-    </ul>
-
-    <h3>4. Jaringan Distribusi Luas</h3>
-    <p>Produk Panasonic tersedia hampir di seluruh wilayah Indonesia maupun dunia.</p>
-    <ul>
-      <li>Produk mudah ditemukan konsumen.</li>
-      <li>Memperluas pangsa pasar.</li>
-    </ul>
-
-    <h3>5. Layanan Purna Jual yang Baik</h3>
-    <p>Panasonic memiliki banyak pusat servis resmi.</p>
-    <ul>
-      <li>Meningkatkan kepuasan pelanggan.</li>
-      <li>Menjaga citra perusahaan.</li>
-    </ul>
-
-    <h3>B. Weaknesses atau Kelemahan</h3>
-    <ul>
-      <li><strong>Harga produk relatif mahal:</strong> konsumen sensitif harga dapat beralih ke merek lain dan Panasonic sulit bersaing pada segmen ekonomi bawah.</li>
-      <li><strong>Proses produksi membutuhkan biaya besar:</strong> standar kualitas tinggi menyebabkan biaya operasional meningkat dan harga jual menjadi lebih tinggi.</li>
-      <li><strong>Ketergantungan pada supplier komponen:</strong> dapat menimbulkan risiko keterlambatan produksi dan kenaikan harga bahan baku.</li>
-      <li><strong>Adaptasi terhadap tren digital kadang lebih lambat:</strong> beberapa kompetitor lebih cepat mengembangkan fitur berbasis AI dan IoT.</li>
-    </ul>
-
-    <h3>C. Opportunities atau Peluang</h3>
-    <ul>
-      <li><strong>Pertumbuhan Smart Home:</strong> membuka pasar baru melalui Smart AC, Smart TV, dan Smart Refrigerator.</li>
-      <li><strong>Perkembangan Internet of Things:</strong> Panasonic dapat mengintegrasikan produknya dengan aplikasi digital.</li>
-      <li><strong>Peningkatan permintaan peralatan hemat energi:</strong> produk hemat energi memiliki daya tarik tinggi bagi konsumen.</li>
-      <li><strong>Ekspansi pasar digital:</strong> marketplace seperti Shopee, Tokopedia, dan Lazada dapat meningkatkan penjualan dan memperluas jangkauan pasar.</li>
-    </ul>
-
-    <h3>D. Threats atau Ancaman</h3>
-    <ul>
-      <li><strong>Persaingan sangat ketat:</strong> Panasonic bersaing dengan Samsung, LG, Xiaomi, dan Sharp.</li>
-      <li><strong>Perubahan teknologi yang cepat:</strong> produk dapat cepat usang jika perusahaan lambat berinovasi.</li>
-      <li><strong>Krisis ekonomi global:</strong> daya beli masyarakat dapat turun sehingga penjualan produk elektronik menurun.</li>
-      <li><strong>Gangguan rantai pasok:</strong> konflik geopolitik, pandemi, atau bencana alam dapat mengganggu produksi dan distribusi bahan baku.</li>
-    </ul>
-
-    <div class="quote">“Kualitas produk saja tidak cukup. Di era digital, perusahaan juga harus cepat berinovasi dan responsif terhadap perubahan pasar.”</div>
-
-    <h2>Evaluasi Kritis Sebagai Mahasiswa</h2>
-    <p>Menurut saya, kekuatan terbesar Panasonic terletak pada kualitas produk dan reputasi merek yang telah dibangun selama puluhan tahun. Namun, di era digital saat ini kualitas saja tidak cukup. Perusahaan harus mampu beradaptasi dengan perubahan teknologi yang sangat cepat.</p>
-    <p>Salah satu masalah yang perlu diperhatikan adalah kecepatan inovasi. Saat ini banyak perusahaan elektronik yang menawarkan fitur berbasis Artificial Intelligence, Internet of Things, dan integrasi aplikasi mobile dengan harga yang lebih kompetitif. Jika Panasonic tidak mempercepat inovasi, maka konsumen generasi muda dapat beralih ke merek lain yang dianggap lebih modern.</p>
-    <p>Selain itu, ketergantungan pada supplier tertentu juga menjadi risiko besar. Gangguan rantai pasok dapat menghambat proses produksi dan menyebabkan keterlambatan distribusi produk ke pasar.</p>
-    <p>Dari sisi proses bisnis, Panasonic sudah memiliki sistem produksi yang efisien dan terstandarisasi, tetapi perlu meningkatkan digitalisasi dalam pengelolaan data produksi, prediksi permintaan pasar, dan manajemen inventori agar lebih responsif terhadap perubahan kebutuhan konsumen.</p>
-
-    <h2>Rekomendasi Perbaikan</h2>
-    <h3>Jangka Pendek</h3>
-    <ul>
-      <li>Memperkuat penjualan melalui marketplace dan e-commerce.</li>
-      <li>Meningkatkan promosi produk hemat energi.</li>
-      <li>Mengoptimalkan sistem manajemen persediaan berbasis data.</li>
-    </ul>
-
-    <h3>Jangka Menengah</h3>
-    <ul>
-      <li>Mengembangkan produk berbasis AI dan IoT.</li>
-      <li>Mengurangi ketergantungan pada satu supplier.</li>
-      <li>Mengintegrasikan sistem ERP untuk meningkatkan efisiensi proses bisnis.</li>
-    </ul>
-
-    <h3>Jangka Panjang</h3>
-    <ul>
-      <li>Investasi pada riset dan pengembangan teknologi ramah lingkungan.</li>
-      <li>Membangun ekosistem Smart Home Panasonic.</li>
-      <li>Memanfaatkan Big Data dan Artificial Intelligence untuk analisis perilaku konsumen.</li>
-    </ul>
-
-    <h2>Kesimpulan</h2>
-    <p>Berdasarkan analisis SWOT, Panasonic memiliki kekuatan utama berupa reputasi merek yang kuat, kualitas produk tinggi, teknologi produksi modern, dan jaringan distribusi yang luas. Namun perusahaan juga menghadapi beberapa kelemahan seperti harga produk yang relatif tinggi, biaya produksi besar, serta tantangan dalam mengikuti perkembangan teknologi yang sangat cepat.</p>
-    <p>Peluang terbesar Panasonic berada pada pertumbuhan pasar Smart Home, IoT, dan produk hemat energi. Di sisi lain, ancaman utama berasal dari persaingan global, perubahan teknologi yang cepat, serta gangguan rantai pasok. Oleh karena itu, Panasonic perlu terus melakukan inovasi, mempercepat transformasi digital, dan meningkatkan efisiensi proses bisnis agar tetap kompetitif di pasar global.</p>
-
-    <button class="back" onclick="backHome()">← Kembali ke Beranda</button>
-  </main>
-</div>
-
-<div id="articlePage2">
-  <main class="article-box">
-    <span class="tag">Business Process</span>
-    <h1>Mengapa Evaluasi Proses Bisnis Penting bagi Perusahaan?</h1>
-    <div class="meta">Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 7 menit membaca</div>
-    <img class="article-img" src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80">
-    <p>Menurut saya, evaluasi proses bisnis merupakan salah satu aktivitas paling penting dalam sebuah organisasi karena menjadi dasar untuk mengetahui apakah seluruh kegiatan perusahaan sudah berjalan sesuai tujuan atau justru mengalami penyimpangan.</p>
-    <p>Dalam dunia bisnis yang kompetitif, perusahaan tidak cukup hanya menjalankan aktivitas operasional setiap hari, tetapi juga harus memastikan bahwa setiap proses yang dilakukan benar-benar memberikan nilai tambah bagi pelanggan dan perusahaan itu sendiri.</p>
-    <h2>Apa Itu Evaluasi Proses Bisnis?</h2>
-    <p>Secara sederhana, evaluasi proses bisnis adalah kegiatan mengukur, menganalisis, dan menilai kinerja suatu proses untuk mengetahui apakah proses tersebut sudah efektif, efisien, dan mampu mendukung pencapaian tujuan organisasi.</p>
-    <p>Tanpa evaluasi, perusahaan hanya bekerja berdasarkan asumsi dan kebiasaan lama tanpa mengetahui apakah cara kerja yang digunakan masih relevan dengan kondisi saat ini.</p>
-    <div class="quote">“Evaluasi proses bisnis bukan hanya mencari kesalahan, tetapi memahami akar masalah agar perusahaan mampu berkembang.”</div>
-    <h2>Pandangan Mahasiswa Kritis</h2>
-    <p>Sebagai mahasiswa yang berpikir kritis, saya melihat bahwa evaluasi proses bisnis bukan hanya berfungsi untuk mencari kesalahan, tetapi lebih kepada upaya memahami akar masalah yang sebenarnya.</p>
-    <p>Banyak perusahaan gagal bukan karena tidak memiliki produk yang bagus, melainkan karena proses bisnisnya tidak mampu mengikuti perubahan lingkungan bisnis.</p>
-    <h2>Contoh Kasus dalam Perusahaan</h2>
-    <p>Contohnya, sebuah perusahaan e-commerce mengalami penurunan kepuasan pelanggan karena pengiriman sering terlambat. Jika perusahaan hanya melihat hasil akhirnya, mereka mungkin akan menyalahkan kurir.</p>
-    <p>Namun melalui evaluasi proses bisnis, perusahaan dapat menemukan bahwa keterlambatan sebenarnya disebabkan oleh sistem pengelolaan gudang yang buruk, proses verifikasi pesanan yang terlalu panjang, atau kurangnya koordinasi antar divisi.</p>
-    <h2>Manfaat Evaluasi Proses Bisnis</h2>
-    <h3>a. Mengidentifikasi Inefisiensi</h3>
-    <p>Dalam setiap organisasi sering ditemukan aktivitas yang sebenarnya tidak memberikan nilai tambah. Misalnya, proses persetujuan dokumen yang harus melewati lima sampai enam level manajemen padahal cukup dua level saja.</p>
-    <ul><li>Waktu kerja menjadi lebih lama.</li><li>Produktivitas menurun.</li><li>Pelanggan harus menunggu lebih lama.</li></ul>
-    <h3>b. Mengurangi Biaya Operasional</h3>
-    <p>Setiap aktivitas dalam proses bisnis membutuhkan biaya. Jika terdapat proses yang berulang atau tidak efisien, maka biaya yang dikeluarkan juga semakin besar.</p>
-    <p>Sebagai contoh, perusahaan masih menggunakan pencatatan manual sehingga membutuhkan banyak tenaga administrasi. Setelah dievaluasi, perusahaan mengimplementasikan sistem digital yang mampu mengurangi biaya administrasi secara signifikan.</p>
-    <h3>c. Meningkatkan Kualitas Pelayanan</h3>
-    <p>Saat ini pelanggan tidak hanya membeli produk, tetapi juga membeli pengalaman. Evaluasi membantu perusahaan memahami bagian mana yang membuat pelanggan merasa puas atau kecewa.</p>
-    <ul><li>Waktu respon customer service terlalu lama.</li><li>Sistem pembayaran sering mengalami gangguan.</li><li>Pengiriman barang tidak tepat waktu.</li></ul>
-    <h3>d. Menyesuaikan Diri dengan Perubahan</h3>
-    <p>Lingkungan bisnis selalu berubah karena perkembangan teknologi, perubahan perilaku konsumen, maupun munculnya kompetitor baru.</p>
-    <p>Proses bisnis yang efektif lima tahun lalu belum tentu masih relevan saat ini. Oleh karena itu evaluasi menjadi alat bagi perusahaan untuk terus beradaptasi.</p>
-    <h2>Pandangan Kritis</h2>
-    <p>Menurut saya, perusahaan yang tidak melakukan evaluasi proses bisnis sebenarnya sedang mengambil risiko besar. Mereka mungkin merasa bisnisnya baik-baik saja karena masih menghasilkan keuntungan, padahal bisa jadi terdapat banyak pemborosan yang tidak disadari.</p>
-    <p>Dalam jangka panjang, perusahaan seperti ini akan sulit bersaing dengan organisasi yang terus melakukan evaluasi dan perbaikan berkelanjutan.</p>
-    <button class="back" onclick="backHome()">← Kembali ke Beranda</button>
-  </main>
-</div>
-
-<div id="articlePage3">
-  <main class="article-box">
-    <span class="tag">Business Process</span>
-    <h1>Perbedaan Evaluasi dan Pengoptimalan Proses Bisnis</h1>
-    <div class="meta">Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 6 menit membaca</div>
-    <img class="article-img" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80">
-    <p>Banyak orang menganggap evaluasi dan pengoptimalan adalah hal yang sama, padahal keduanya memiliki fungsi yang berbeda meskipun saling berkaitan.</p>
-    <h2>Evaluasi Proses Bisnis</h2>
-    <p>Evaluasi berfokus pada kegiatan mengukur dan menganalisis kondisi proses yang sedang berjalan.</p>
-    <h3>Tujuan Evaluasi</h3>
-    <ul><li>Menemukan masalah.</li><li>Mengidentifikasi hambatan.</li><li>Mengetahui penyebab ketidakefisienan.</li><li>Mengukur tingkat keberhasilan proses.</li></ul>
-    <h3>Pertanyaan Saat Evaluasi</h3>
-    <ul><li>Mengapa proses ini lambat?</li><li>Di mana terjadi pemborosan?</li><li>Apa penyebab tingginya tingkat kesalahan?</li><li>Bagaimana tingkat kepuasan pelanggan?</li></ul>
-    <div class="quote">“Evaluasi berfungsi untuk memahami kondisi saat ini dan menemukan akar masalah yang sebenarnya.”</div>
-    <h2>Pengoptimalan Proses Bisnis</h2>
-    <p>Pengoptimalan merupakan tindakan lanjutan setelah evaluasi dilakukan.</p>
-    <h3>Tujuan Pengoptimalan</h3>
-    <ul><li>Memperbaiki proses.</li><li>Menyederhanakan prosedur.</li><li>Menghilangkan aktivitas yang tidak perlu.</li><li>Meningkatkan efektivitas dan efisiensi.</li></ul>
-    <h3>Pertanyaan Saat Pengoptimalan</h3>
-    <ul><li>Bagaimana cara mempercepat proses?</li><li>Teknologi apa yang dapat digunakan?</li><li>Langkah mana yang bisa dihilangkan?</li><li>Bagaimana mengurangi biaya operasional?</li></ul>
-    <h2>Contoh Nyata</h2>
-    <p>Misalnya sebuah rumah sakit memiliki waktu tunggu pasien rata-rata 3 jam.</p>
-    <h3>Tahap Evaluasi</h3>
-    <ul><li>Mengumpulkan data waktu tunggu.</li><li>Menganalisis alur pelayanan pasien.</li><li>Menemukan bahwa proses registrasi masih manual.</li><li>Mengetahui jumlah petugas pendaftaran tidak mencukupi.</li></ul>
-    <h3>Tahap Pengoptimalan</h3>
-    <ul><li>Membuat sistem pendaftaran online.</li><li>Menambah mesin antrean digital.</li><li>Menambah petugas pada jam sibuk.</li><li>Mengintegrasikan data pasien secara otomatis.</li></ul>
-    <h2>Pandangan Kritis</h2>
-    <p>Menurut saya, kesalahan yang sering dilakukan perusahaan adalah langsung melakukan pengoptimalan tanpa evaluasi yang mendalam. Akibatnya solusi yang diterapkan hanya mengatasi gejala, bukan akar masalah.</p>
-    <p>Perusahaan sering membeli teknologi mahal karena dianggap modern, padahal masalah sebenarnya berasal dari budaya kerja yang buruk atau SOP yang tidak jelas. Oleh karena itu evaluasi harus selalu menjadi fondasi sebelum melakukan pengoptimalan.</p>
-    <button class="back" onclick="backHome()">← Kembali ke Beranda</button>
-  </main>
-</div>
-
-<div id="articlePage4">
-  <main class="article-box">
-    <span class="tag">Technology</span>
-    <h1>Cara Teknologi Membantu Pengoptimalan Proses Bisnis</h1>
-    <div class="meta">Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 5 menit membaca</div>
-    <img class="article-img" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80">
-    <p>Teknologi membantu proses bisnis menjadi lebih cepat, akurat, terukur, dan mudah dikontrol. Contohnya, sistem kasir digital dapat mencatat penjualan otomatis, aplikasi stok bisa memberi peringatan jika barang hampir habis, dan dashboard manajemen bisa menampilkan data penjualan secara real-time.</p>
-    <h2>Mengurangi Pekerjaan Manual</h2>
-    <p>Teknologi juga mengurangi pekerjaan manual yang berulang. Misalnya, dulu laporan penjualan dibuat manual di Excel setiap akhir hari. Dengan sistem digital, laporan bisa langsung muncul otomatis. Ini menghemat waktu dan mengurangi risiko salah input.</p>
-    <div class="quote">“Teknologi bukan solusi ajaib. Jika proses bisnis dasarnya masih kacau, teknologi hanya akan mempercepat kekacauan tersebut.”</div>
-    <h2>Pandangan Kritis</h2>
-    <p>Namun secara kritis, teknologi bukan solusi ajaib. Jika proses bisnis dasarnya masih kacau, teknologi hanya akan mempercepat kekacauan tersebut.</p>
-    <p>Misalnya, perusahaan memakai aplikasi absensi canggih, tetapi aturan kerja tidak jelas. Maka masalah utamanya tetap tidak selesai.</p>
-    <h2>BPM Berbasis Teknologi</h2>
-    <p>BPM berbasis teknologi dapat membantu menghilangkan duplikasi proses dan bottleneck sehingga efisiensi dan produktivitas meningkat.</p>
-    <button class="back" onclick="backHome()">← Kembali ke Beranda</button>
-  </main>
-</div>
-
-<div id="articlePage5">
-  <main class="article-box">
-    <span class="tag">Business Risk</span>
-    <h1>Dampak Jika Perusahaan Tidak Melakukan Evaluasi Proses Bisnis</h1>
-    <div class="meta">Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 6 menit membaca</div>
-    <img class="article-img" src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80">
-    <p>Menurut saya, tidak melakukan evaluasi proses bisnis sama seperti seorang dokter yang tidak pernah memeriksa kondisi pasien tetapi terus memberikan obat yang sama setiap hari.</p>
-    <p>Awalnya mungkin tidak terlihat masalah, tetapi lama-kelamaan akan muncul dampak yang serius.</p>
-    <div class="quote">“Masalah terbesar perusahaan bukan hanya rugi, tetapi merasa semua baik-baik saja padahal prosesnya sedang melemah.”</div>
-    <h2>a. Pemborosan Biaya</h2>
-    <p>Tanpa evaluasi, perusahaan tidak mengetahui aktivitas mana yang sebenarnya tidak memberikan nilai tambah.</p>
-    <ul><li>Biaya operasional meningkat.</li><li>Produktivitas menurun.</li><li>Keuntungan berkurang.</li></ul>
-    <h2>b. Menurunnya Kepuasan Pelanggan</h2>
-    <p>Pelanggan saat ini memiliki banyak pilihan. Jika pelayanan lambat, produk sering terlambat, dan kualitas tidak konsisten, maka pelanggan akan berpindah ke kompetitor.</p>
-    <ul><li>Pelayanan lambat.</li><li>Produk sering terlambat.</li><li>Kualitas tidak konsisten.</li></ul>
-    <h2>c. Sulit Bersaing</h2>
-    <p>Kompetitor terus melakukan inovasi dan perbaikan. Perusahaan yang tidak mengevaluasi prosesnya akan tertinggal karena menggunakan cara kerja lama yang sudah tidak relevan.</p>
-    <h2>d. Risiko Kesalahan Semakin Tinggi</h2>
-    <p>Tanpa evaluasi, kesalahan operasional akan lebih mudah terjadi dan lebih sulit dicegah.</p>
-    <ul><li>Kesalahan terus berulang.</li><li>Fraud lebih sulit dideteksi.</li><li>Risiko operasional meningkat.</li></ul>
-    <h2>e. Sulit Mengambil Keputusan</h2>
-    <p>Keputusan bisnis yang baik harus didasarkan pada data dan fakta. Jika proses tidak pernah dievaluasi, manajemen kehilangan informasi penting.</p>
-    <ul><li>Manajemen kehilangan informasi penting.</li><li>Keputusan menjadi kurang akurat.</li><li>Strategi bisnis berisiko gagal.</li></ul>
-    <h2>Pandangan Kritis</h2>
-    <p>Menurut saya, ancaman terbesar bukanlah kerugian finansial, melainkan munculnya budaya organisasi yang merasa "semua baik-baik saja".</p>
-    <p>Ketika perusahaan terlalu nyaman dengan cara kerja lama, inovasi akan berhenti. Pada akhirnya perusahaan bisa kehilangan daya saing dan tersingkir dari pasar.</p>
-    <button class="back" onclick="backHome()">← Kembali ke Beranda</button>
-  </main>
-</div>
-
-<div id="articlePage6">
-  <main class="article-box">
-    <span class="tag">Daily Process</span>
-    <h1>Contoh Pengoptimalan Proses Bisnis dalam Kehidupan Sehari-hari</h1>
-    <div class="meta">Ditulis oleh Admin BlogVerse • 5 Juni 2026 • 6 menit membaca</div>
-    <img class="article-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80">
-    <p>Pengoptimalan proses bisnis sebenarnya tidak hanya terjadi di perusahaan besar. Dalam kehidupan sehari-hari kita juga sering melakukannya.</p>
-    <div class="quote">“Pengoptimalan bukan membuat proses menjadi lebih rumit, tetapi membuat proses menjadi lebih bernilai.”</div>
-    <h2>Contoh: Kantin Kampus</h2>
-    <h3>Sebelum Dioptimalkan</h3>
-    <p><strong>Proses:</strong></p>
-    <ul><li>Mahasiswa datang.</li><li>Memesan makanan.</li><li>Penjual menulis pesanan.</li><li>Pesanan diberikan ke dapur.</li><li>Pembayaran dilakukan setelah makanan selesai.</li></ul>
-    <p><strong>Masalah:</strong></p>
-    <ul><li>Antrean panjang.</li><li>Pesanan tertukar.</li><li>Pelanggan menunggu lama.</li><li>Penjual kesulitan mencatat transaksi.</li></ul>
-    <h2>Tahap Evaluasi</h2>
-    <p>Ditemukan bahwa:</p>
-    <ul><li>Pencatatan manual terlalu lambat.</li><li>Menu sering habis tanpa diketahui.</li><li>Antrean pembayaran menghambat pelayanan.</li></ul>
-    <h2>Tahap Pengoptimalan</h2>
-    <p>Solusi:</p>
-    <ul><li>Menggunakan QR Code untuk pemesanan.</li><li>Menampilkan stok makanan secara digital.</li><li>Menggunakan pembayaran QRIS.</li><li>Menggunakan sistem nomor antrean.</li></ul>
-    <h2>Hasil Setelah Dioptimalkan</h2>
-    <ul><li>Waktu tunggu berkurang.</li><li>Kesalahan pesanan menurun.</li><li>Penjualan meningkat.</li><li>Pelanggan lebih puas.</li><li>Pengelolaan keuangan lebih mudah.</li></ul>
-    <h2>Analisis Kritis</h2>
-    <p>Menurut saya, inti dari pengoptimalan bukan membuat proses menjadi lebih rumit atau lebih canggih, tetapi membuat proses menjadi lebih bernilai.</p>
-    <p>Suatu proses dianggap optimal bukan karena menggunakan teknologi terbaru, melainkan karena mampu menghasilkan hasil terbaik dengan sumber daya seminimal mungkin.</p>
-    <p>Dengan kata lain, proses bisnis yang baik adalah proses yang mampu menyeimbangkan efisiensi, efektivitas, kualitas pelayanan, kepuasan pelanggan, dan keuntungan perusahaan secara bersamaan.</p>
-    <button class="back" onclick="backHome()">← Kembali ke Beranda</button>
-  </main>
-</div>
-
-<footer>
-  © 2026 BlogVerse. Dibuat dengan desain modern dan aesthetic.
-</footer>
-
-<script>
-  function hideAllPages(){
-    document.getElementById("homePage").style.display="none";
-    document.getElementById("articlePage1").style.display="none";
-    document.getElementById("articlePage2").style.display="none";
-    document.getElementById("articlePage3").style.display="none";
-    document.getElementById("articlePage4").style.display="none";
-    document.getElementById("articlePage5").style.display="none";
-    document.getElementById("articlePage6").style.display="none";
-  }
-  function showArticle1(){hideAllPages();document.getElementById("articlePage1").style.display="block";window.scrollTo({top:0,behavior:"smooth"});}
-  function showArticle2(){hideAllPages();document.getElementById("articlePage2").style.display="block";window.scrollTo({top:0,behavior:"smooth"});}
-  function showArticle3(){hideAllPages();document.getElementById("articlePage3").style.display="block";window.scrollTo({top:0,behavior:"smooth"});}
-  function showArticle4(){hideAllPages();document.getElementById("articlePage4").style.display="block";window.scrollTo({top:0,behavior:"smooth"});}
-  function showArticle5(){hideAllPages();document.getElementById("articlePage5").style.display="block";window.scrollTo({top:0,behavior:"smooth"});}
-  function showArticle6(){hideAllPages();document.getElementById("articlePage6").style.display="block";window.scrollTo({top:0,behavior:"smooth"});}
-  function backHome(){hideAllPages();document.getElementById("homePage").style.display="block";window.scrollTo({top:0,behavior:"smooth"});}
-</script>
-</body>
+    <script>
+      function hideAllPages() {
+        document.getElementById("homePage").style.display = "none";
+        document.getElementById("articlePage1").style.display = "none";
+        document.getElementById("articlePage2").style.display = "none";
+        document.getElementById("articlePage3").style.display = "none";
+        document.getElementById("articlePage4").style.display = "none";
+        document.getElementById("articlePage5").style.display = "none";
+        document.getElementById("articlePage6").style.display = "none";
+      }
+      function showArticle1() {
+        hideAllPages();
+        document.getElementById("articlePage1").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      function showArticle2() {
+        hideAllPages();
+        document.getElementById("articlePage2").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      function showArticle3() {
+        hideAllPages();
+        document.getElementById("articlePage3").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      function showArticle4() {
+        hideAllPages();
+        document.getElementById("articlePage4").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      function showArticle5() {
+        hideAllPages();
+        document.getElementById("articlePage5").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      function showArticle6() {
+        hideAllPages();
+        document.getElementById("articlePage6").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      function backHome() {
+        hideAllPages();
+        document.getElementById("homePage").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    </script>
+  </body>
 </html>

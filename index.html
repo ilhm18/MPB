@@ -321,6 +321,14 @@
         padding: 35px;
         color: #666;
       }
+      .backsound-frame {
+        width: 0;
+        height: 0;
+        border: 0;
+        position: fixed;
+        left: -9999px;
+        top: -9999px;
+      }
       @media (max-width: 768px) {
         header {
           flex-direction: column;
@@ -1287,8 +1295,27 @@
 
     <footer>© 2026 HamBlog</footer>
 
+    <iframe
+      id="backsoundFrame"
+      class="backsound-frame"
+      title="Backsound YouTube"
+      allow="autoplay; encrypted-media"
+      referrerpolicy="strict-origin-when-cross-origin"
+    ></iframe>
+
     <script>
       let currentVisitorName = "Modern & Aesthetic";
+      const backsoundVideoId = "phLR_UweMv0";
+      const backsoundUrl = `https://www.youtube.com/embed/${backsoundVideoId}?autoplay=1&loop=1&playlist=${backsoundVideoId}&controls=0&modestbranding=1&rel=0`;
+
+      function initBacksoundAutoPlay() {
+        const backsoundFrame = document.getElementById("backsoundFrame");
+        if (!backsoundFrame) {
+          return;
+        }
+
+        backsoundFrame.src = backsoundUrl;
+      }
 
       function updateVisitorName(name) {
         currentVisitorName = name;
@@ -1393,6 +1420,7 @@
         }
 
         askVisitorName();
+        initBacksoundAutoPlay();
       });
     </script>
   </body>

@@ -355,61 +355,6 @@
         left: -9999px;
         top: -9999px;
       }
-
-      /* ANIMASI SCROLL KE BAWAH & KE ATAS */
-      html {
-        scroll-behavior: smooth;
-      }
-
-      .scroll-animate {
-        opacity: 0;
-        transform: translateY(55px) scale(0.98);
-        filter: blur(6px);
-        transition:
-          opacity 0.75s ease,
-          transform 0.75s ease,
-          filter 0.75s ease;
-        will-change: opacity, transform, filter;
-      }
-
-      .scroll-animate.show {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
-      }
-
-      .scroll-animate.hide-down {
-        opacity: 0;
-        transform: translateY(55px) scale(0.98);
-        filter: blur(6px);
-      }
-
-      .scroll-animate.hide-up {
-        opacity: 0;
-        transform: translateY(-55px) scale(0.98);
-        filter: blur(6px);
-      }
-
-      .post.scroll-animate {
-        transition-delay: var(--delay, 0s);
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        html {
-          scroll-behavior: auto;
-        }
-
-        .scroll-animate,
-        .scroll-animate.show,
-        .scroll-animate.hide-down,
-        .scroll-animate.hide-up {
-          opacity: 1;
-          transform: none;
-          filter: none;
-          transition: none;
-        }
-      }
-
       @media (max-width: 768px) {
         header {
           padding: 16px 6%;
@@ -1519,63 +1464,6 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
-
-      function setupScrollAnimations() {
-        let lastScrollY = window.scrollY;
-        let scrollDirection = "down";
-
-        const animatedElements = document.querySelectorAll(
-          ".hero > div, .hero-card, .section-title, .post, .newsletter, .article-box, footer"
-        );
-
-        animatedElements.forEach((element, index) => {
-          element.classList.add("scroll-animate", "hide-down");
-
-          if (element.classList.contains("post")) {
-            element.style.setProperty("--delay", `${(index % 6) * 0.08}s`);
-          }
-        });
-
-        window.addEventListener(
-          "scroll",
-          () => {
-            const currentScrollY = window.scrollY;
-            scrollDirection = currentScrollY > lastScrollY ? "down" : "up";
-            lastScrollY = currentScrollY;
-          },
-          { passive: true }
-        );
-
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              const element = entry.target;
-
-              if (entry.isIntersecting) {
-                element.classList.add("show");
-                element.classList.remove("hide-down", "hide-up");
-              } else {
-                element.classList.remove("show");
-
-                if (scrollDirection === "down") {
-                  element.classList.add("hide-up");
-                  element.classList.remove("hide-down");
-                } else {
-                  element.classList.add("hide-down");
-                  element.classList.remove("hide-up");
-                }
-              }
-            });
-          },
-          {
-            threshold: 0.18,
-            rootMargin: "0px 0px -70px 0px",
-          }
-        );
-
-        animatedElements.forEach((element) => observer.observe(element));
-      }
-
       document.addEventListener("DOMContentLoaded", () => {
         const visitorNameSubmit = document.getElementById("visitorNameSubmit");
         const visitorNameInput = document.getElementById("visitorNameInput");
@@ -1610,7 +1498,6 @@
           });
         }
 
-        setupScrollAnimations();
         askVisitorName();
         initBacksoundAutoPlay();
       });
